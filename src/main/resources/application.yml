@@ -1,0 +1,30 @@
+info:
+  application:
+    name: INTRANET-API
+    description: Api rest para la nueva INTRANET de la SBLM
+    version: 1.0.0
+    year: 2024
+  vendor:
+    name: Sociedad Beneficencia de Lima Metropolitana
+    address: Jr. Carabaya 641
+    city: Lima
+    country: Peru
+    phone: (01) 427-6520
+    email: jcayo@beneficenciadelima.org
+    url: https://beneficenciadelima.org/
+
+server:
+  port: 8088
+
+spring:
+  datasource:
+    url: jdbc:sqlserver://192.168.1.14:1433/intranet
+    username: sa
+    password: s3gur1d@dsblm
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  jpa:
+    database-platform: org.hibernate.dialect.SQLServer2012Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
