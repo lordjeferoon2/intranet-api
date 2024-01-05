@@ -1,5 +1,6 @@
 package pe.sblm.intranet.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,10 +19,11 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/files")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 public class FileController {
 
-    private final String uploadDir = "/home/intranet_user/media/";
+	@Value("${custom.url}")
+    String uploadDir;
 
     @PostMapping
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {

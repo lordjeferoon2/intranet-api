@@ -33,3 +33,7 @@ spring:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
+      
+custom:
+  url: C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps
+  #url: /srv/samba/share/
