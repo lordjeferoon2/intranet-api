@@ -5,6 +5,6 @@ import pe.sblm.intranet.model.Usuario;
 
 import java.util.Optional;
 
-public interface UsuarioRepo extends JpaRepository<Usuario, Long> {
+public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByUsuarioAndContrasena(String usuario, String contrasena);
 }

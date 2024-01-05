@@ -1,5 +1,6 @@
 package pe.sblm.intranet.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,24 +12,42 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(length = 50)
     private String nombres;
+
+    @Column(length = 50)
     private String apellidos;
+    
+    @Column(length = 8)
+    private String dni;
+
+    @Column(length = 20)
     private String usuario;
+
+    @Column(length = 20)
     private String contrasena;
+
     private int tipo;
+
+    @Column(length = 5)
     private String dependencia;
+
+    @Column(length = 5)
     private String dependenciaHijo;
+
+    @Column(length = 50)
     private String sede;
     
     public Usuario() {
     	
     }
     
-	public Usuario(String nombres, String apellidos, String usuario, String contrasena, int tipo, String dependencia,
+	public Usuario(String nombres, String apellidos, String dni, String usuario, String contrasena, int tipo, String dependencia,
 			String dependenciaHijo, String sede) {
 		super();
 		this.nombres = nombres;
 		this.apellidos = apellidos;
+		this.dni = dni;
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.tipo = tipo;
@@ -61,6 +80,14 @@ public class Usuario {
 		this.apellidos = apellidos;
 	}
 	
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
 	public String getUsuario() {
 		return usuario;
 	}

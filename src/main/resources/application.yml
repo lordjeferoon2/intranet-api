@@ -18,7 +18,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:sqlserver://192.168.1.14:1433/intranet
+    url: jdbc:sqlserver://192.168.1.14:1433;databaseName=intranet
     username: sa
     password: s3gur1d@dsblm
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
@@ -28,3 +28,8 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+    
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB

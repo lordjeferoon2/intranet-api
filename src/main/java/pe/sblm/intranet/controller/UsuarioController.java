@@ -5,17 +5,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.sblm.intranet.model.Usuario;
-import pe.sblm.intranet.repository.UsuarioRepo;
+import pe.sblm.intranet.repository.UsuarioRepositorio;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/usuarios")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepo usuarioRepository;
+    private UsuarioRepositorio usuarioRepository;
 
     @PostMapping
     public ResponseEntity<Usuario> crearUsuario(@RequestBody Usuario usuario) {
