@@ -30,7 +30,7 @@ public class Publicacion {
     @Column(length = 30)
     private String fechaEvento;
     
-    @Column(length = 100)
+    @Column(length = 200)
     private String urlDocumento;
     
     public Publicacion() {
@@ -112,5 +112,19 @@ public class Publicacion {
 	public void setUrlDocumento(String urlDocumento) {
 		this.urlDocumento = urlDocumento;
 	}
+	
+	@Override
+    public String toString() {
+        return "Publicacion{" +
+                "id=" + id +
+                ", gerencia='" + gerencia + '\'' +
+                ", tipoPublicacion='" + tipoPublicacion + '\'' +
+                ", titulo='" + titulo + '\'' +
+                ", contenido='" + contenido + '\'' +
+                ", fechaPublicacion='" + fechaPublicacion + '\'' +
+                ", fechaEvento='" + fechaEvento + '\'' +
+                ", urlDocumento='" + urlDocumento + '\'' +
+                '}';
+    }
 
 }

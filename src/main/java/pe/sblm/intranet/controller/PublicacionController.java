@@ -23,8 +23,9 @@ public class PublicacionController {
     @PostMapping
     public ResponseEntity<Publicacion> crearPublicacion(@RequestBody Publicacion publicacion) {
         Publicacion nuevaPublicacion = publicacionRepo.save(publicacion);
-        String fecha = LocalDateTime.now().toString();
-        nuevaPublicacion.setFechaPublicacion(fecha);
+        //String fecha = LocalDateTime.now().toString().substring(0, 10);
+        //nuevaPublicacion.setFechaPublicacion(fecha);
+        System.out.print(nuevaPublicacion.toString());
         return ResponseEntity.ok(nuevaPublicacion);
     }
     
