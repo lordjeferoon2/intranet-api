@@ -3,6 +3,7 @@ package pe.sblm.intranet.controller;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,19 +26,19 @@ public class FileController {
 	@Value("${custom.url}")
     String uploadDir;
 
-    @PostMapping
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    @PostMapping(value="/{tipo}")
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String tipo) {
         try {
-            File directory = new File(uploadDir);
+            File directory = new File(uploadDir + "\\" + tipo);
             if (!directory.exists()) {
                 directory.mkdir();
             }
 
             String fileName = generateUniqueFileName(file.getOriginalFilename());
-            Path targetLocation = Paths.get(uploadDir).resolve(fileName);
+            Path targetLocation = Paths.get(uploadDir + "\\" + tipo).resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            return ResponseEntity.ok(uploadDir + "/" + fileName);
+            return ResponseEntity.ok(uploadDir + "\\" + tipo + "/" + fileName);
         } catch (IOException ex) {
             return ResponseEntity.badRequest().body("Error uploading the file.");
         }
