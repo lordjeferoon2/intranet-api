@@ -5,10 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity
+//@Entity
 public class Plan {
-    @Id
+    /*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
@@ -32,7 +33,6 @@ public class Plan {
     }
 
 	public Plan(String entidad, String informe, String fechaInforme, String tipoAuditoria, String entidadAuditora) {
-		super();
 		this.entidad = entidad;
 		this.informe = informe;
 		this.fechaInforme = fechaInforme;
@@ -86,6 +86,6 @@ public class Plan {
 
 	public void setEntidadAuditora(String entidadAuditora) {
 		this.entidadAuditora = entidadAuditora;
-	}
-    
+	}*/
+
 }
