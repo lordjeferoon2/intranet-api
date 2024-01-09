@@ -1,6 +1,6 @@
 info:
   application:
-    name: INTRANET-API
+    name: intranet-api
     description: Api rest para la nueva INTRANET de la SBLM
     version: 1.0.0
     year: 2024
@@ -14,7 +14,8 @@ info:
     url: https://beneficenciadelima.org/
 
 server:
-  port: 8088
+  servlet:
+    context-path: /intranet-api
 
 spring:
   datasource:
@@ -28,12 +29,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-    
   servlet:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
-      
+
 custom:
   url: C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps
   #url: /srv/samba/share/
