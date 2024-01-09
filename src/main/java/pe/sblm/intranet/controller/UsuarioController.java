@@ -69,4 +69,11 @@ public class UsuarioController {
         return usuarioOptional.map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    @GetMapping("/getByDependencia/{dependencia}")
+    public ResponseEntity<List<Usuario>> obtenerTodosUsuariosPorOficina(@PathVariable String dependencia) {
+        List<Usuario> usuarios = usuarioRepository.findAllByDependencia(dependencia);
+        return new ResponseEntity<>(usuarios, HttpStatus.OK);
+    }
+
 }

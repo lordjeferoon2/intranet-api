@@ -28,21 +28,24 @@ public class FileController {
 
     @PostMapping(value="/{tipo}")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String tipo) {
+        String uploadDir2 = "http://192.168.1.6/media";
         try {
-            File directory = new File(uploadDir + "\\" + tipo);
+            File directory = new File(uploadDir + "/" + tipo);
             if (!directory.exists()) {
-                directory.mkdir();
+                directory.mkdirs(); // Utiliza mkdirs para crear directorios recursivamente si no existen
             }
 
             String fileName = generateUniqueFileName(file.getOriginalFilename());
-            Path targetLocation = Paths.get(uploadDir + "\\" + tipo).resolve(fileName);
+            Path targetLocation = Paths.get(uploadDir + "/" + tipo).resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
 
-            return ResponseEntity.ok(uploadDir + "\\" + tipo + "/" + fileName);
+            return ResponseEntity.ok(uploadDir2 + "/" + tipo + "/" + fileName);
         } catch (IOException ex) {
-            return ResponseEntity.badRequest().body("Error uploading the file.");
+            ex.printStackTrace(); // Imprime el stack trace del error para identificar la causa
+            return ResponseEntity.badRequest().body("Error uploading the file: " + ex.getMessage());
         }
     }
+
 
     private String generateUniqueFileName(String originalFileName) {
         String extension = "";
