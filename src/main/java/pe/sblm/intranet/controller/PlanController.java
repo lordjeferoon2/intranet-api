@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import pe.sblm.intranet.model.Plan;
-//import pe.sblm.intranet.repository.PlanRepositorio;
+import pe.sblm.intranet.repository.PlanRepositorio;
 
 @RestController
 @RequestMapping("/api/planes")
 @CrossOrigin(origins = "*")
 public class PlanController {
 	
-	/*@Autowired
+	@Autowired
     private PlanRepositorio planRepository;
 
     @PostMapping
@@ -67,6 +67,6 @@ public class PlanController {
     public ResponseEntity<List<Plan>> obtenerTodosPlans() {
     	List<Plan> planes = planRepository.findAll();
         return new ResponseEntity<>(planes, HttpStatus.OK);
-    }*/
+    }
       
 }

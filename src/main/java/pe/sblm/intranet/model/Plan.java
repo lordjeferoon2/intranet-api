@@ -8,18 +8,19 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+@Table(name = "plann")
 public class Plan {
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(length = 50)
+    @Column(length = 150)
     private String nombre;
     
-    @Column(length = 100)
+    @Column(length = 150)
     private String entidad;
     
-    @Column(length = 100)
+    @Column(length = 150)
     private String informe;
     
     @Column(length = 30)
@@ -28,7 +29,7 @@ public class Plan {
     @Column(length = 30)
     private String tipoAuditoria;
     
-    @Column(length = 100)
+    @Column(length = 150)
     private String entidadAuditora;
     
     public Plan() {
@@ -36,6 +37,7 @@ public class Plan {
     }
 
 	public Plan(String nombre, String entidad, String informe, String fechaInforme, String tipoAuditoria, String entidadAuditora) {
+		super();
 		this.nombre = nombre;
 		this.entidad = entidad;
 		this.informe = informe;

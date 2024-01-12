@@ -33,7 +33,7 @@ public class Recomendacion {
     @Column(length = 30)
     private String fechaFinal;
     
-    @Column(length = 5)
+    @Column(length = 300)
     private String unidadResponsable;
     
     @Column(length = 100)
@@ -48,13 +48,22 @@ public class Recomendacion {
     @Column(length = 300)
     private String observacionRiesgos;
     
+    private Long usuarioCreacion;
+    
+    private Long usuarioModificacion;
+    
+    private String fechaCreación;
+    
+    private String fechaModificacion;
+    
     public Recomendacion() {
     	
     }
 
 	public Recomendacion(Long idPlan, int numero, String observacion, int nivelRiesgo, String recomendacion, String acciones,
 			String medio, String fechaFinal, String unidadResponsable, String documentoUnidadResponsable,
-			String dniResponsable, String nombresResponsable, String observacionRiesgos) {
+			String dniResponsable, String nombresResponsable, String observacionRiesgos, Long usuarioCreacion, Long usuarioModificacion,
+			String fechaCreacion, String fechaModificacion) {
 		super();
 		this.idPlan = idPlan;
 		this.numero = numero;
@@ -69,6 +78,10 @@ public class Recomendacion {
 		this.dniResponsable = dniResponsable;
 		this.nombresResponsable = nombresResponsable;
 		this.observacionRiesgos = observacionRiesgos;
+		this.usuarioCreacion = usuarioCreacion;
+		this.usuarioModificacion = usuarioModificacion;
+		this.fechaCreación = fechaCreacion;
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	public Long getId() {
@@ -181,6 +194,38 @@ public class Recomendacion {
 
 	public void setObservacionRiesgos(String observacionRiesgos) {
 		this.observacionRiesgos = observacionRiesgos;
+	}
+
+	public Long getUsuarioCreacion() {
+		return usuarioCreacion;
+	}
+
+	public void setUsuarioCreacion(Long usuarioCreacion) {
+		this.usuarioCreacion = usuarioCreacion;
+	}
+
+	public Long getUsuarioModificacion() {
+		return usuarioModificacion;
+	}
+
+	public void setUsuarioModificacion(Long usuarioModificacion) {
+		this.usuarioModificacion = usuarioModificacion;
+	}
+
+	public String getFechaCreación() {
+		return fechaCreación;
+	}
+
+	public void setFechaCreación(String fechaCreación) {
+		this.fechaCreación = fechaCreación;
+	}
+
+	public String getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	public void setFechaModificacion(String fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
     
 }
