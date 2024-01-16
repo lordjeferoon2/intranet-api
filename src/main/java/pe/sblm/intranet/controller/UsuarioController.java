@@ -63,6 +63,13 @@ public class UsuarioController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/buscarPorUsernameYContrasena/{username}")
+    public ResponseEntity<Usuario> buscarPorUsername(@PathVariable String username) {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findByUsuario(username);
+        return usuarioOptional.map(usuario -> new ResponseEntity<>(usuario, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @GetMapping("/buscarPorUsernameYContrasena/{username}/{contrasena}")
     public ResponseEntity<Usuario> buscarPorUsernameYContrasena(@PathVariable String username, @PathVariable String contrasena) {
         Optional<Usuario> usuarioOptional = usuarioRepository.findByUsuarioAndContrasena(username, contrasena);
