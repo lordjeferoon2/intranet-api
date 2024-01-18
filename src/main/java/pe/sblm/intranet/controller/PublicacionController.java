@@ -104,6 +104,22 @@ public class PublicacionController {
             publicaciones.addAll(publicaciones2);
             publicaciones.addAll(publicaciones3);
         }
+        
+        if(tipo.equals("Eventos")) {
+        	publicaciones.sort((p1, p2) -> {
+        	    String fecha1 = p1.getFechaEvento();
+        	    String fecha2 = p2.getFechaEvento();
+        	    return fecha1.compareTo(fecha2);
+        	});
+        }
+        else {
+        	publicaciones.sort((p1, p2) -> {
+        	    String fecha1 = p1.getFechaPublicacion();
+        	    String fecha2 = p2.getFechaPublicacion();
+        	    return fecha2.compareTo(fecha1);
+        	});
+        }
+        
     	return ResponseEntity.ok(publicaciones);
     }
 

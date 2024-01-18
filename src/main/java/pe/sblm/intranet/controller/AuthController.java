@@ -59,7 +59,7 @@ public class AuthController {
             context.close();
             return true;
         } catch (NamingException e) {
-            // System.out.println("Error en la autenticación: " + e.getMessage());
+            System.out.println("Error en la autenticación: " + e.getMessage());
             return false;
         }
     }

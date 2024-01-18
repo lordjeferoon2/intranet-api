@@ -23,7 +23,6 @@ spring:
     username: sa
     password: s3gur1d@dsblm
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-
   jpa:
     database-platform: org.hibernate.dialect.SQLServer2012Dialect
     hibernate:
