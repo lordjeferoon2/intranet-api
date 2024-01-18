@@ -34,5 +34,5 @@ spring:
       max-request-size: 50MB
 
 custom:
-  url: C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps
-  #url: /var/www/html/media
+  #url: C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps
+  url: /var/www/html/media
