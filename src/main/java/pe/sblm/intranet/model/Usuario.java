@@ -34,16 +34,21 @@ public class Usuario {
 
     @Column(length = 5)
     private String dependenciaHijo;
+    
+    @Column(length = 30)
+    private String correo;
 
     @Column(length = 50)
     private String sede;
+    
+    private boolean estado;
     
     public Usuario() {
     	
     }
     
 	public Usuario(String nombres, String apellidos, String dni, String usuario, String contrasena, int tipo, String dependencia,
-			String dependenciaHijo, String sede) {
+			String dependenciaHijo, String correo, String sede, boolean estado) {
 		super();
 		this.nombres = nombres;
 		this.apellidos = apellidos;
@@ -53,7 +58,10 @@ public class Usuario {
 		this.tipo = tipo;
 		this.dependencia = dependencia;
 		this.dependenciaHijo = dependenciaHijo;
+		this.correo = correo;
 		this.sede = sede;
+		this.estado = estado;
+		
 	}
 
 	public Long getId() {
@@ -128,12 +136,28 @@ public class Usuario {
 		this.dependenciaHijo = dependenciaHijo;
 	}
 	
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
 	public String getSede() {
 		return sede;
 	}
 	
 	public void setSede(String sede) {
 		this.sede = sede;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
     
 }

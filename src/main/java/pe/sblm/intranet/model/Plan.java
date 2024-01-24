@@ -32,11 +32,14 @@ public class Plan {
     @Column(length = 150)
     private String entidadAuditora;
     
+    @Column(length = 100)
+    private String titularEntidadAuditora;
+    
     public Plan() {
     	
     }
 
-	public Plan(String nombre, String entidad, String informe, String fechaInforme, String tipoAuditoria, String entidadAuditora) {
+	public Plan(String nombre, String entidad, String informe, String fechaInforme, String tipoAuditoria, String entidadAuditora, String titularEntidadAuditora) {
 		super();
 		this.nombre = nombre;
 		this.entidad = entidad;
@@ -44,6 +47,7 @@ public class Plan {
 		this.fechaInforme = fechaInforme;
 		this.tipoAuditoria = tipoAuditoria;
 		this.entidadAuditora = entidadAuditora;
+		this.titularEntidadAuditora = titularEntidadAuditora;
 	}
 
 	public Long getId() {
@@ -100,6 +104,14 @@ public class Plan {
 
 	public void setEntidadAuditora(String entidadAuditora) {
 		this.entidadAuditora = entidadAuditora;
+	}
+
+	public String getTitularEntidadAuditora() {
+		return titularEntidadAuditora;
+	}
+
+	public void setTitularEntidadAuditora(String titularEntidadAuditora) {
+		this.titularEntidadAuditora = titularEntidadAuditora;
 	}
 
 }

@@ -32,6 +32,17 @@ spring:
     multipart:
       max-file-size: 50MB
       max-request-size: 50MB
+  mail:
+    host: mail.beneficenciadelima.org
+    port: 587
+    username: jvargas@beneficenciadelima.org
+    password: 12345678Ab**2023
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
 
 custom:
   #url: C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps

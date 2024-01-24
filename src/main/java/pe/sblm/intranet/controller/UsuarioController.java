@@ -36,7 +36,9 @@ public class UsuarioController {
             existingUsuario.setTipo(usuario.getTipo());
             existingUsuario.setDependencia(usuario.getDependencia());
             existingUsuario.setDependenciaHijo(usuario.getDependenciaHijo());
+            existingUsuario.setCorreo(usuario.getCorreo());
             existingUsuario.setSede(usuario.getSede());
+            existingUsuario.setEstado(usuario.isEstado());
             usuarioRepository.save(existingUsuario);
             return new ResponseEntity<>(existingUsuario, HttpStatus.OK);
         } else {

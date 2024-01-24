@@ -2,12 +2,16 @@ package pe.sblm.intranet.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import pe.sblm.intranet.model.Documento;
 import pe.sblm.intranet.model.Publicacion;
+import pe.sblm.intranet.model.Usuario;
 import pe.sblm.intranet.repository.DocumentoRepositorio;
 import pe.sblm.intranet.repository.PublicacionRepositorio;
+import pe.sblm.intranet.repository.UsuarioRepositorio;
+import pe.sblm.intranet.service.EmailService;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -19,18 +23,30 @@ import java.util.Optional;
 @CrossOrigin(origins = "*")
 public class PublicacionController {
 
-    @Autowired
-    private PublicacionRepositorio publicacionRepo;
+    private final PublicacionRepositorio publicacionRepo;
     
-    @Autowired
-    private DocumentoRepositorio documentoRepo;
+    private final DocumentoRepositorio documentoRepo;
+    
+    private final EmailService emailService;
+    
+    private final UsuarioRepositorio usuarioRepo;
+    
+	public PublicacionController(PublicacionRepositorio publicacionRepo, DocumentoRepositorio documentoRepo,
+			EmailService emailService, UsuarioRepositorio usuarioRepo) {
+		super();
+		this.publicacionRepo = publicacionRepo;
+		this.documentoRepo = documentoRepo;
+		this.emailService = emailService;
+		this.usuarioRepo = usuarioRepo;
+	}
 
-    @PostMapping
+	@PostMapping
     public ResponseEntity<Publicacion> crearPublicacion(@RequestBody Publicacion publicacion) {
         Publicacion nuevaPublicacion = publicacionRepo.save(publicacion);
-        //String fecha = LocalDateTime.now().toString().substring(0, 10);
-        //nuevaPublicacion.setFechaPublicacion(fecha);
-        System.out.print(nuevaPublicacion.toString());
+        List<Usuario> usuarios = usuarioRepo.findAllByEstado(true);
+        for (Usuario usuario : usuarios) {
+            enviarCorreoAsincrono(usuario, nuevaPublicacion);
+        }
         return ResponseEntity.ok(nuevaPublicacion);
     }
     
@@ -128,6 +144,33 @@ public class PublicacionController {
         Optional<Publicacion> publicacionOptional = publicacionRepo.findById(id);
         return publicacionOptional.map(publicacion -> ResponseEntity.ok(publicacion))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    
+    @Async
+    public void enviarCorreoAsincrono(Usuario usuario, Publicacion nuevaPublicacion) {
+        String cuerpoCorreo = "";
+        if (nuevaPublicacion.getTipoPublicacion().equals("Comunicaciones") ||
+            nuevaPublicacion.getTipoPublicacion().equals("Eventos") ||
+            nuevaPublicacion.getTipoPublicacion().equals("Galería")) {
+            cuerpoCorreo = "¡Hola, " + usuario.getNombres() + "!\n\n"
+                    + "Se ha registrado una nueva publicación en la INTRANET.\n"
+                    + "Puedes visitarla en la siguiente ruta:\n"
+                    + "http://intranet.benelima.pe/new/" + nuevaPublicacion.getId() + "\n\n"
+                    + "¡Esperamos que encuentres la información interesante!\n"
+                    + "Saludos,\n"
+                    + "Tu equipo de la INTRANET";
+        } else {
+        	String tipo = "";
+            cuerpoCorreo = "¡Hola, " + usuario.getNombres() + "!\n\n"
+                    + "Se ha cargado un nuevo documento en la INTRANET.\n"
+                    + "Puedes visitarla en la siguiente ruta:\n"
+                    + nuevaPublicacion.getUrlDocumento() + "\n\n"
+                    + "¡Esperamos que encuentres la información interesante!\n"
+                    + "Saludos,\n"
+                    + "Tu equipo de la INTRANET";
+        }
+
+        emailService.sendEmail(usuario.getCorreo() + "@beneficenciadelima.org", "Nueva Publicación en la INTRANET", cuerpoCorreo);
     }
 
 }

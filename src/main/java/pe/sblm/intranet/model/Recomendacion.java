@@ -56,6 +56,8 @@ public class Recomendacion {
     
     private String fechaModificacion;
     
+    private boolean estado;
+    
     public Recomendacion() {
     	
     }
@@ -63,7 +65,7 @@ public class Recomendacion {
 	public Recomendacion(Long idPlan, int numero, String observacion, int nivelRiesgo, String recomendacion, String acciones,
 			String medio, String fechaFinal, String unidadResponsable, String documentoUnidadResponsable,
 			String dniResponsable, String nombresResponsable, String observacionRiesgos, Long usuarioCreacion, Long usuarioModificacion,
-			String fechaCreacion, String fechaModificacion) {
+			String fechaCreacion, String fechaModificacion, boolean estado) {
 		super();
 		this.idPlan = idPlan;
 		this.numero = numero;
@@ -82,6 +84,7 @@ public class Recomendacion {
 		this.usuarioModificacion = usuarioModificacion;
 		this.fechaCreación = fechaCreacion;
 		this.fechaModificacion = fechaModificacion;
+		this.estado = estado;
 	}
 
 	public Long getId() {
@@ -226,6 +229,14 @@ public class Recomendacion {
 
 	public void setFechaModificacion(String fechaModificacion) {
 		this.fechaModificacion = fechaModificacion;
+	}
+
+	public boolean isEstado() {
+		return estado;
+	}
+
+	public void setEstado(boolean estado) {
+		this.estado = estado;
 	}
     
 }

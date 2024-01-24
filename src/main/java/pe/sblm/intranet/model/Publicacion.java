@@ -18,7 +18,7 @@ public class Publicacion {
     @Column(length = 15)
     private String tipoPublicacion;
     
-    @Column(length = 100)
+    @Column(length = 200)
     private String titulo;
     
     @Column(length = 1000)
