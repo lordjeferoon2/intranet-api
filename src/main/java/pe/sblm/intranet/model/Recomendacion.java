@@ -52,7 +52,7 @@ public class Recomendacion {
     
     private Long usuarioModificacion;
     
-    private String fechaCreación;
+    private String fechaCreacion;
     
     private String fechaModificacion;
     
@@ -82,7 +82,7 @@ public class Recomendacion {
 		this.observacionRiesgos = observacionRiesgos;
 		this.usuarioCreacion = usuarioCreacion;
 		this.usuarioModificacion = usuarioModificacion;
-		this.fechaCreación = fechaCreacion;
+		this.fechaCreacion = fechaCreacion;
 		this.fechaModificacion = fechaModificacion;
 		this.estado = estado;
 	}
@@ -215,12 +215,12 @@ public class Recomendacion {
 		this.usuarioModificacion = usuarioModificacion;
 	}
 
-	public String getFechaCreación() {
-		return fechaCreación;
+	public String getFechaCreacion() {
+		return fechaCreacion;
 	}
 
-	public void setFechaCreación(String fechaCreación) {
-		this.fechaCreación = fechaCreación;
+	public void setFechaCreacion(String fechaCreación) {
+		this.fechaCreacion = fechaCreación;
 	}
 
 	public String getFechaModificacion() {

@@ -9,5 +9,5 @@ import pe.sblm.intranet.model.Recomendacion;
 
 @Repository
 public interface RecomendacionRepositorio extends JpaRepository<Recomendacion, Long> {
-	List<Recomendacion> findAllByIdPlan(Long idPlan);
+	List<Recomendacion> findAllByIdPlanAndEstadoOrderByNumeroAsc(Long idPlan, boolean estado);
 }

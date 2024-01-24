@@ -50,6 +50,11 @@ public class RecomendacionController {
             existingRecomendacion.setDniResponsable(recomendacion.getDniResponsable());
             existingRecomendacion.setNombresResponsable(recomendacion.getNombresResponsable());
             existingRecomendacion.setObservacionRiesgos(recomendacion.getObservacionRiesgos());
+            existingRecomendacion.setUsuarioCreacion(recomendacion.getUsuarioCreacion());
+            existingRecomendacion.setUsuarioModificacion(recomendacion.getUsuarioModificacion());
+            existingRecomendacion.setFechaCreacion(recomendacion.getFechaCreacion());
+            existingRecomendacion.setFechaModificacion(recomendacion.getFechaModificacion());
+            existingRecomendacion.setEstado(recomendacion.isEstado());
             
             recomendacionRepository.save(existingRecomendacion);
             return new ResponseEntity<>(existingRecomendacion, HttpStatus.OK);
@@ -80,7 +85,7 @@ public class RecomendacionController {
 
     @GetMapping("/getByPlan/{plan}")
     public ResponseEntity<List<Recomendacion>> obtenerTodosRecomendacionesPorPlan(@PathVariable Long plan) {
-        List<Recomendacion> recomendacions = recomendacionRepository.findAllByIdPlan(plan);
+        List<Recomendacion> recomendacions = recomendacionRepository.findAllByIdPlanAndEstadoOrderByNumeroAsc(plan, true);
         return new ResponseEntity<>(recomendacions, HttpStatus.OK);
     }
 }
