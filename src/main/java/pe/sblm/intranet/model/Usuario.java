@@ -28,6 +28,9 @@ public class Usuario {
     private String contrasena;
 
     private int tipo;
+    
+    @Column(length = 50)
+    private String accesos;
 
     @Column(length = 5)
     private String dependencia;
@@ -47,8 +50,8 @@ public class Usuario {
     	
     }
     
-	public Usuario(String nombres, String apellidos, String dni, String usuario, String contrasena, int tipo, String dependencia,
-			String dependenciaHijo, String correo, String sede, boolean estado) {
+	public Usuario(String nombres, String apellidos, String dni, String usuario, String contrasena, int tipo,
+			String accesos, String dependencia, String dependenciaHijo, String correo, String sede, boolean estado) {
 		super();
 		this.nombres = nombres;
 		this.apellidos = apellidos;
@@ -56,12 +59,12 @@ public class Usuario {
 		this.usuario = usuario;
 		this.contrasena = contrasena;
 		this.tipo = tipo;
+		this.accesos = accesos;
 		this.dependencia = dependencia;
 		this.dependenciaHijo = dependenciaHijo;
 		this.correo = correo;
 		this.sede = sede;
 		this.estado = estado;
-		
 	}
 
 	public Long getId() {
@@ -158,6 +161,14 @@ public class Usuario {
 
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+
+	public String getAccesos() {
+		return accesos;
+	}
+
+	public void setAccesos(String accesos) {
+		this.accesos = accesos;
 	}
     
 }

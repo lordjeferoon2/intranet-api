@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import pe.sblm.intranet.model.Documento;
+import pe.sblm.intranet.model.DocumentoRecomendacion;
+import pe.sblm.intranet.repository.DocumentoRecomendacionRepositorio;
 import pe.sblm.intranet.repository.DocumentoRepositorio;
 
 import java.io.File;
@@ -28,13 +30,18 @@ import java.util.UUID;
 public class FileController {
 	@Autowired
     private DocumentoRepositorio documentoRepository;
+	
+	@Autowired
+    private DocumentoRecomendacionRepositorio documentoRecomendacionRepository;
 
-	@Value("${custom.url}")
+	@Value("${custom.urlFolder}")
     String uploadDir;
+	
+	@Value("${custom.urlServer}")
+    String urlDoc;
 
-    @PostMapping(value="/{tipo}/{idPublicacion}")
+    @PostMapping(value="/publication/{tipo}/{idPublicacion}")
     public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable String tipo,  @PathVariable Long idPublicacion) {
-        String uploadDir2 = "http://192.168.1.6/media";
         try {
             File directory = new File(uploadDir + "/" + tipo);
             if (!directory.exists()) {
@@ -45,15 +52,38 @@ public class FileController {
             Path targetLocation = Paths.get(uploadDir + "/" + tipo).resolve(fileName);
             Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
             
-            Documento documento = new Documento(idPublicacion, uploadDir2 + "/" + tipo + "/" + fileName);
+            Documento documento = new Documento(idPublicacion, urlDoc + "/" + tipo + "/" + fileName);
             this.documentoRepository.save(documento);
 
-            return ResponseEntity.ok(uploadDir2 + "/" + tipo + "/" + fileName);
+            return ResponseEntity.ok(urlDoc + "/" + tipo + "/" + fileName);
         } catch (IOException ex) {
             ex.printStackTrace(); 
             return ResponseEntity.badRequest().body("Error uploading the file: " + ex.getMessage());
         }
     }
+    
+    @PostMapping(value="/recomendation/{tipo}/{idRecomendacion}/{fecha}")
+    public ResponseEntity<String> uploadFileRecomendacion(@RequestParam("file") MultipartFile file, @PathVariable String tipo,  @PathVariable Long idRecomendacion, @PathVariable String fecha) {
+        try {
+            File directory = new File(uploadDir + "/" + tipo);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+
+            String fileName = generateUniqueFileName(file.getOriginalFilename());
+            Path targetLocation = Paths.get(uploadDir + "/" + tipo).resolve(fileName);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+            
+            DocumentoRecomendacion documentoRec = new DocumentoRecomendacion(idRecomendacion, urlDoc + "/" + tipo + "/" + fileName, file.getOriginalFilename(), fecha);
+            this.documentoRecomendacionRepository.save(documentoRec);
+
+            return ResponseEntity.ok(urlDoc + "/" + tipo + "/" + fileName);
+        } catch (IOException ex) {
+            ex.printStackTrace(); 
+            return ResponseEntity.badRequest().body("Error uploading the file: " + ex.getMessage());
+        }
+    }
+
 
 
     private String generateUniqueFileName(String originalFileName) {

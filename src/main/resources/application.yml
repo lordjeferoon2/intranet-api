@@ -45,5 +45,7 @@ spring:
             enable: true
 
 custom:
-  #url: C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps
-  url: /var/www/html/media
+  #urlServer: http://localhost:8080/media
+  #urlFolder: C:\Program Files\Apache Software Foundation\Tomcat 9.0\webapps
+  urlServer: http://192.168.1.6/media
+  urlFolder: /var/www/html/media
