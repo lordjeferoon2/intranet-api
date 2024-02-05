@@ -32,17 +32,20 @@ public class Usuario {
     @Column(length = 50)
     private String accesos;
 
-    @Column(length = 5)
+    @Column(length = 25)
     private String dependencia;
 
-    @Column(length = 5)
+    @Column(length = 25)
     private String dependenciaHijo;
     
-    @Column(length = 30)
+    @Column(length = 50)
     private String correo;
 
     @Column(length = 50)
     private String sede;
+
+	@Column(length = 250)
+	private String cargo;
     
     private boolean estado;
     
@@ -51,7 +54,8 @@ public class Usuario {
     }
     
 	public Usuario(String nombres, String apellidos, String dni, String usuario, String contrasena, int tipo,
-			String accesos, String dependencia, String dependenciaHijo, String correo, String sede, boolean estado) {
+			String accesos, String dependencia, String dependenciaHijo, String correo, String sede, String cargo,
+				   boolean estado) {
 		super();
 		this.nombres = nombres;
 		this.apellidos = apellidos;
@@ -64,6 +68,7 @@ public class Usuario {
 		this.dependenciaHijo = dependenciaHijo;
 		this.correo = correo;
 		this.sede = sede;
+		this.cargo = cargo;
 		this.estado = estado;
 	}
 
@@ -169,6 +174,14 @@ public class Usuario {
 
 	public void setAccesos(String accesos) {
 		this.accesos = accesos;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
 	}
     
 }
