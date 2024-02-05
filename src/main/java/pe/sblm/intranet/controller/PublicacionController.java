@@ -1,20 +1,14 @@
 package pe.sblm.intranet.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.bind.annotation.*;
 
 import pe.sblm.intranet.model.Documento;
 import pe.sblm.intranet.model.Publicacion;
-import pe.sblm.intranet.model.Usuario;
 import pe.sblm.intranet.repository.DocumentoRepositorio;
 import pe.sblm.intranet.repository.PublicacionRepositorio;
-import pe.sblm.intranet.repository.UsuarioRepositorio;
 import pe.sblm.intranet.service.EmailService;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

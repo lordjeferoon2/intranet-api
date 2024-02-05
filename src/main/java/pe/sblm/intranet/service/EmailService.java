@@ -34,7 +34,7 @@ public class EmailService {
             cuerpoCorreo = "¡Hola, " + usuario.getNombres() + "!\n\n"
                     + "Se ha registrado una nueva publicación en la INTRANET.\n"
                     + "Puedes visitarla en la siguiente ruta:\n"
-                    + "http://intranet.benelima.pe/new/" + nuevaPublicacion.getId() + "\n\n"
+                    + "http://intranet.benelima.pe/#/new/" + nuevaPublicacion.getId() + "\n\n"
                     + "¡Esperamos que encuentres la información interesante!\n"
                     + "Saludos,\n"
                     + "Tu equipo de la INTRANET";
