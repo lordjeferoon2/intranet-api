@@ -32,7 +32,7 @@ public class Publicacion {
     
     @Column(length = 200)
     private String urlDocumento;
-    
+        
     public Publicacion() {
     	
     }
@@ -112,7 +112,7 @@ public class Publicacion {
 	public void setUrlDocumento(String urlDocumento) {
 		this.urlDocumento = urlDocumento;
 	}
-	
+
 	@Override
     public String toString() {
         return "Publicacion{" +

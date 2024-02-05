@@ -29,24 +29,17 @@ public class PublicacionController {
     
     private final EmailService emailService;
     
-    private final UsuarioRepositorio usuarioRepo;
-    
 	public PublicacionController(PublicacionRepositorio publicacionRepo, DocumentoRepositorio documentoRepo,
-			EmailService emailService, UsuarioRepositorio usuarioRepo) {
+			EmailService emailService) {
 		super();
 		this.publicacionRepo = publicacionRepo;
 		this.documentoRepo = documentoRepo;
 		this.emailService = emailService;
-		this.usuarioRepo = usuarioRepo;
 	}
 
 	@PostMapping
     public ResponseEntity<Publicacion> crearPublicacion(@RequestBody Publicacion publicacion) {
         Publicacion nuevaPublicacion = publicacionRepo.save(publicacion);
-        List<Usuario> usuarios = usuarioRepo.findAllByEstado(true);
-        for (Usuario usuario : usuarios) {
-            enviarCorreoAsincrono(usuario, nuevaPublicacion);
-        }
         return ResponseEntity.ok(nuevaPublicacion);
     }
     
@@ -59,6 +52,7 @@ public class PublicacionController {
             existingPublicacion.setTipoPublicacion(publicacion.getTipoPublicacion());
             existingPublicacion.setTitulo(publicacion.getTitulo());
             existingPublicacion.setContenido(publicacion.getContenido());
+            existingPublicacion.setUrlDocumento(publicacion.getUrlDocumento());
 
             Publicacion updatedPublicacion = publicacionRepo.save(existingPublicacion);
             return ResponseEntity.ok(updatedPublicacion);
@@ -114,7 +108,9 @@ public class PublicacionController {
             List<Publicacion> publicaciones3 = publicacionRepo.findAllByTipoPublicacion("Galería");
             for(int i=0; i<publicaciones3.size(); i++) {
                 List<Documento> documentos = documentoRepo.findAllByIdPublicacion(publicaciones3.get(i).getId());
-                publicaciones3.get(i).setUrlDocumento(documentos.get(0).getUrlDocumento());
+                if(publicaciones3.get(i).getUrlDocumento().length() == 0) {
+                	publicaciones3.get(i).setUrlDocumento(documentos.get(0).getUrlDocumento());
+                }
             }
 
             publicaciones.addAll(publicaciones2);
@@ -146,31 +142,4 @@ public class PublicacionController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
     
-    @Async
-    public void enviarCorreoAsincrono(Usuario usuario, Publicacion nuevaPublicacion) {
-        String cuerpoCorreo = "";
-        if (nuevaPublicacion.getTipoPublicacion().equals("Comunicaciones") ||
-            nuevaPublicacion.getTipoPublicacion().equals("Eventos") ||
-            nuevaPublicacion.getTipoPublicacion().equals("Galería")) {
-            cuerpoCorreo = "¡Hola, " + usuario.getNombres() + "!\n\n"
-                    + "Se ha registrado una nueva publicación en la INTRANET.\n"
-                    + "Puedes visitarla en la siguiente ruta:\n"
-                    + "http://intranet.benelima.pe/new/" + nuevaPublicacion.getId() + "\n\n"
-                    + "¡Esperamos que encuentres la información interesante!\n"
-                    + "Saludos,\n"
-                    + "Tu equipo de la INTRANET";
-        } else {
-        	String tipo = "";
-            cuerpoCorreo = "¡Hola, " + usuario.getNombres() + "!\n\n"
-                    + "Se ha cargado un nuevo documento en la INTRANET.\n"
-                    + "Puedes visitarla en la siguiente ruta:\n"
-                    + nuevaPublicacion.getUrlDocumento() + "\n\n"
-                    + "¡Esperamos que encuentres la información interesante!\n"
-                    + "Saludos,\n"
-                    + "Tu equipo de la INTRANET";
-        }
-
-        emailService.sendEmail(usuario.getCorreo() + "@beneficenciadelima.org", "Nueva Publicación en la INTRANET", cuerpoCorreo);
-    }
-
 }
