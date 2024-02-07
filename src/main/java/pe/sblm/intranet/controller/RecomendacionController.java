@@ -88,4 +88,10 @@ public class RecomendacionController {
         List<Recomendacion> recomendacions = recomendacionRepository.findAllByIdPlanAndEstadoOrderByNumeroAsc(plan, true);
         return new ResponseEntity<>(recomendacions, HttpStatus.OK);
     }
+    
+    @GetMapping("/getByDate/{fecha}/{plan}")
+    public ResponseEntity<List<Recomendacion>> obtenerTodosRecomendacionesHastaFecha(@PathVariable String fecha, @PathVariable Long plan) {
+        List<Recomendacion> recomendacions = recomendacionRepository.obtenerRecomendacionesHastaFecha(fecha, plan);
+        return new ResponseEntity<>(recomendacions, HttpStatus.OK);
+    }
 }
