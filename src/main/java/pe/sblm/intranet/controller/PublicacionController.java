@@ -132,7 +132,11 @@ public class PublicacionController {
     @GetMapping("/{id}")
     public ResponseEntity<Publicacion> obtenerPublicacionPorId(@PathVariable Long id) {
         Optional<Publicacion> publicacionOptional = publicacionRepo.findById(id);
-        return publicacionOptional.map(publicacion -> ResponseEntity.ok(publicacion))
+        Publicacion pub = publicacionOptional.get();
+        List<Documento> documentos = documentoRepo.findAllByIdPublicacion(pub.getId());
+        pub.setUrlDocumento(documentos.get(0).getUrlDocumento());
+    	
+        return publicacionOptional.map(publicacion -> ResponseEntity.ok(pub))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
     
