@@ -61,6 +61,7 @@ public class EmailService {
             		+ "Gerencia de Tecnologías de la Información y Comunicaciones";
         }
 
-        sendEmail(usuario.getCorreo() + "@beneficenciadelima.org", nuevaPublicacion.getTitulo(), cuerpoCorreo);
+        String correoDestino = usuario.getCorreo().endsWith("@beneficenciadelima.org") ? usuario.getCorreo() : usuario.getCorreo() + "@beneficenciadelima.org";
+        sendEmail(correoDestino, nuevaPublicacion.getTitulo(), cuerpoCorreo);
     }
 }
