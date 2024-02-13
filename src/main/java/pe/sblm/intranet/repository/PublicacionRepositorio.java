@@ -10,8 +10,6 @@ import pe.sblm.intranet.model.Publicacion;
 @Repository
 public interface PublicacionRepositorio extends JpaRepository<Publicacion, Long> {
 	List<Publicacion> findAllByGerencia(String gerencia);
-	
-	List<Publicacion> findAllByTipoPublicacionIn(List<String> tipos);
 
     List<Publicacion> findAllByTipoPublicacion(String tipo);
 }
