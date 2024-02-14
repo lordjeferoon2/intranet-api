@@ -29,7 +29,7 @@ public class UnidadController {
     @PostMapping
     public ResponseEntity<Unidad> crearUnidad(@RequestBody Unidad unidad) {
         Unidad nuevoUnidad = unidadRepository.save(unidad);
-        return new ResponseEntity<>(nuevoUnidad, HttpStatus.CREATED);
+        return new ResponseEntity<Unidad>(nuevoUnidad, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
@@ -40,8 +40,8 @@ public class UnidadController {
             existingUnidad.setNomUnidad(unidad.getNomUnidad());
             existingUnidad.setAbrUnidad(unidad.getAbrUnidad());
             existingUnidad.setAbrUnidadPrincipal(unidad.getAbrUnidadPrincipal());
-            existingUnidad.setEstUnidad(unidad.getEstUnidad());
-            existingUnidad.setDepUnidad(unidad.getDepUnidad());
+            existingUnidad.setEstUnidad(unidad.isEstUnidad());
+            existingUnidad.setDepUnidad(unidad.isDepUnidad());
             unidadRepository.save(existingUnidad);
             return new ResponseEntity<>(existingUnidad, HttpStatus.OK);
         } else {

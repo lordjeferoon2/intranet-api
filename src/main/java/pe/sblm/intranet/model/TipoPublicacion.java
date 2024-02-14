@@ -12,8 +12,11 @@ public class TipoPublicacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(length = 20)
+    @Column(length = 30)
     private String nombre;
+    
+    @Column(length = 60)
+    private String nombreCompleto;
     
     @Column(length = 20)
     private String accesos;
@@ -22,9 +25,10 @@ public class TipoPublicacion {
     	
     }
 
-	public TipoPublicacion(String nombre, String accesos) {
+	public TipoPublicacion(String nombre, String nombreCompleto, String accesos) {
 		super();
 		this.nombre = nombre;
+		this.nombreCompleto = nombreCompleto;
 		this.accesos = accesos;
 	}
 
@@ -50,6 +54,14 @@ public class TipoPublicacion {
 
 	public void setAccesos(String accesos) {
 		this.accesos = accesos;
+	}
+
+	public String getNombreCompleto() {
+		return nombreCompleto;
+	}
+
+	public void setNombreCompleto(String nombreCompleto) {
+		this.nombreCompleto = nombreCompleto;
 	}
     
 }

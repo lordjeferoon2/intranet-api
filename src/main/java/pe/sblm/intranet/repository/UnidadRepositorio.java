@@ -4,7 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import pe.sblm.intranet.model.Unidad;
 
-	public interface UnidadRepositorio extends JpaRepository<Unidad, Long> {
+public interface UnidadRepositorio extends JpaRepository<Unidad, Long> {
 		
-	}
-
+}

@@ -1,12 +1,10 @@
 package pe.sblm.intranet.model;
 
 import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
 public class Unidad {
@@ -16,8 +14,8 @@ public class Unidad {
     
     @Column(length = 150)
     private String nomUnidad;
-    
-    @Column(length = 5)
+
+	@Column(length = 5)
     private String abrUnidad;
     
     @Column(length = 5)
@@ -33,55 +31,76 @@ public class Unidad {
 	public Unidad() {
 		
 	}
-	 
-	 public Unidad(String nomUnidad, String abrUnidad, String abrUnidadPrincipal, boolean estUnidad, boolean depUnidad) {
+    
+    public Unidad(Long id, String nomUnidad, String abrUnidad, String abrUnidadPrincipal, boolean estUnidad, boolean depUnidad) {
 		super();
+		this.id = id;
 		this.nomUnidad = nomUnidad;
 		this.abrUnidad = abrUnidad;
-		this.abrUnidadPrincipal = abrUnidadPrincipal ;
+		this.abrUnidadPrincipal = abrUnidadPrincipal;
 		this.estUnidad = estUnidad;
 		this.depUnidad = depUnidad;
 	}
 
-		public String getNomUnidad() {
-			return nomUnidad;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		public void setNomUnidad(String nomUnidad) {
-			this.nomUnidad = nomUnidad;
-		}
 
-		public String getAbrUnidad() {
-			return abrUnidad;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		public void setAbrUnidad(String abrUnidad) {
-			this.abrUnidad = abrUnidad;
-		}
-		
-		public String getAbrUnidadPrincipal() {
-			return abrUnidadPrincipal;
-		}
+
+	public String getNomUnidad() {
+		return nomUnidad;
+	}
+
+
+	public void setNomUnidad(String nomUnidad) {
+		this.nomUnidad = nomUnidad;
+	}
+
+
+	public String getAbrUnidad() {
+		return abrUnidad;
+	}
+
+
+	public void setAbrUnidad(String abrUnidad) {
+		this.abrUnidad = abrUnidad;
+	}
+
+
+	public String getAbrUnidadPrincipal() {
+		return abrUnidadPrincipal;
+	}
+
+
+	public void setAbrUnidadPrincipal(String abrUnidadPrincipal) {
+		this.abrUnidadPrincipal = abrUnidadPrincipal;
+	}
+
+
+	public boolean isEstUnidad() {
+		return estUnidad;
+	}
+
+
+	public void setEstUnidad(boolean estUnidad) {
+		this.estUnidad = estUnidad;
+	}
+
+
+	public boolean isDepUnidad() {
+		return depUnidad;
+	}
+
+
+	public void setDepUnidad(boolean depUnidad) {
+		this.depUnidad = depUnidad;
+	}
+	 
 	
-		public void setAbrUnidadPrincipal(String abrUnidadPrincipal) {
-			this.abrUnidadPrincipal = abrUnidadPrincipal;
-		}
-
-		public boolean getEstUnidad() {
-			return estUnidad;
-		}
-
-		public void setEstUnidad(boolean estUnidad) {
-			this.estUnidad = estUnidad;
-		}
-
-		public boolean getDepUnidad() {
-			return depUnidad;
-		}
-
-		public void setDepUnidad(boolean depUnidad) {
-			this.depUnidad = depUnidad;
-		}
-
 
 }
