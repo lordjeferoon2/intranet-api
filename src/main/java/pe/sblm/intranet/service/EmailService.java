@@ -16,12 +16,12 @@ public class EmailService {
         this.javaMailSender = javaMailSender;
     }
 
-    public void sendEmail(String to, String subject, String body) {
+    public void sendEmail(String to, String from, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);
-        message.setFrom("comunicaciones@beneficenciadelima.org");
+        message.setFrom(from);
 
         javaMailSender.send(message);
     }
@@ -60,8 +60,14 @@ public class EmailService {
                     + "Tu equipo de la INTRANET\n"
             		+ "Gerencia de Tecnologías de la Información y Comunicaciones";
         }
-
+        String correoOrigen = "";
+        if(nuevaPublicacion.getGerencia().equals("GTI")) {
+        	correoOrigen = "comunicaciones.GTI@beneficenciadelima.org";
+        }
+        else {
+        	correoOrigen = "comunicaciones@beneficenciadelima.org";
+        }
         String correoDestino = usuario.getCorreo().endsWith("@beneficenciadelima.org") ? usuario.getCorreo() : usuario.getCorreo() + "@beneficenciadelima.org";
-        sendEmail(correoDestino, nuevaPublicacion.getTitulo(), cuerpoCorreo);
+        sendEmail(correoDestino, correoOrigen, nuevaPublicacion.getTitulo(), cuerpoCorreo);
     }
 }
