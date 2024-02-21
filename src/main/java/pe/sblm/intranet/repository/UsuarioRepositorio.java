@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByUsuarioAndContrasena(String usuario, String contrasena);
     List<Usuario> findAllByDependencia(String dependencoa);
+    List<Usuario> findAllByDependenciaHijo(String dependencoa);
     List<Usuario> findAllByEstado(boolean estado);
     Optional<Usuario> findByUsuario(String username);
 }

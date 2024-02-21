@@ -84,5 +84,11 @@ public class UsuarioController {
         List<Usuario> usuarios = usuarioRepository.findAllByDependencia(dependencia);
         return new ResponseEntity<>(usuarios, HttpStatus.OK);
     }
+    
+    @GetMapping("/getByDependenciaHijo/{dependenciaHijo}")
+    public ResponseEntity<List<Usuario>> obtenerTodosUsuariosPorDependenciaHijo(@PathVariable String dependenciaHijo) {
+        List<Usuario> usuarios = usuarioRepository.findAllByDependenciaHijo(dependenciaHijo);
+        return new ResponseEntity<>(usuarios, HttpStatus.OK);
+    }
 
 }
